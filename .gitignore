@@ -1,4 +1,7 @@
 node_modules
 css
+dist
+
+!Globs/assets/css
 
 .DS_store
