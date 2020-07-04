@@ -1,6 +1,11 @@
 # Gulp API src()
 `src()` is a function built into Gulp that takes a glob (or an array of globs) and an options object as parameters. `src()` takes the globs given and turns the found files into an in-memory file stream that the rest of the task pipeline can use to read or manipulate files as needed.
 
+## Adding options to src()
+To add options to a task's `src()`, add a `,` after the glob parameter and add a JavaScript object with the options set as a parameter.
+
+`src('/glob/path/*.js', { options: value })`
+
 ## Common Options
 Lets explore some common options for src that can change the way that your task runs and when you want to use them.
 
