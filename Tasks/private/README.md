@@ -1,11 +1,11 @@
-# Gulp Tasks Overview
+# Gulp Private Tasks Overview
 Lets take a look at what Gulp tasks are, the pieces that make them up, and
 how to build a simple task.
 
-## The Anatomy of a Gulp Task
+## The Anatomy of a private Gulp Task
 
 ### The Base
-The most basic building block of a gulp task is a named JavaScript function. 
+The most basic building block of a private Gulp task is a named JavaScript function. 
 This function's name specifies the name of the task and it's block contains 
 the entirety of the task's pipeline. The function's name should accurately 
 describe what the task's purpose is.
@@ -16,11 +16,11 @@ function taskName() {
 }
 ``` 
 **NOTE** - Older versions of Gulp used the Gulp API function `task()`
-instead of functions to build tasks. This is no longer recommended and all
-your tasks should be built as a function.
+to build private tasks. This is no longer recommended and all your 
+private tasks should be built as named functions.
 
 ### The Source
-For tasks to run, they need a source of files to use. We can tell gulp where
+For private tasks to run, they need a source of files to use. We can tell Gulp where
 to find the files we want to work with using the Gulp API function `src()`. 
 
 `src()` takes either a single glob, or an array of globs as it's parameter. Gulp
@@ -40,7 +40,7 @@ function fileArray() {
 **NOTE** - Always put a `return` before your source.
 
 ### The Pipeline
-Gulp tasks run on pipelines. The task pipeline takes the file stream from
+Private Gulp tasks run on pipelines. The task pipeline takes the file stream from
 our `src()` and leads it through various plugins, Gulp API functions, or 
 custom functions that read and manipulate the stream.
 
@@ -60,8 +60,8 @@ function pipeline() {
 ``` 
 
 # Putting Everything Together
-Let's take our building blocks and create a gulp task that compiles scss files,
-minifies them, and creates a new style.min.css file with them.
+Let's take our building blocks and create a private Gulp task that compiles scss files,
+minifies them, and creates a new style.min.css file.
 
 ## Building the base
 First, we have to start with the base. For this task we're going to create a
@@ -94,5 +94,5 @@ function compileSass() {
         .pipe(dest('./css/')); //output combined file to ./css/
 }
 ```
-Congratulations! We just built a Gulp task to take care of our scss. You can use
-the same process that we used here to create any Gulp tasks for your projects.
+Congratulations! We just built a private Gulp task to take care of our scss. You can use
+the same process that we used here to create any private Gulp tasks for your projects.
