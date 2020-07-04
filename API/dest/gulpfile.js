@@ -1,4 +1,5 @@
-const { src, dest, series, lastRun } = require('gulp'),
+const { src, dest, parallel, lastRun } = require('gulp'),
+    sass = require('gulp-dart-sass'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify');
 
@@ -11,4 +12,12 @@ function compileJavascript() {
         .pipe(dest('./dist/', { sourcemaps: './maps' })); 
 }
 
-exports.default = series(compileJavascript);
+function compileSass() {
+    return src('./sass/*.scss', { sourcemaps: true })
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        // output files to ./dist/ folder
+        // enable inline sourcemaps on the files
+        .pipe(dest('./dist/css', { sourcemaps: true }))
+}
+
+exports.default = parallel(compileJavascript, compileSass);
