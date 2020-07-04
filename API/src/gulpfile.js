@@ -1,8 +1,14 @@
-const { src, dest, series } = require('gulp');
+const { src, dest, series, lastRun } = require('gulp'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify');
 
 function sourceTest() {
-    return src('./js/*.js') //source glob searching js directory for any file that ends in .js
-        .pipe(dest('./dist/')); //move files into dist directory
+    // source glob to find all .js files in /js/
+    // source options to enable sourcemaps, allow empty files, and only stream files since this task was last ran
+    return src(['./js/*.js', './js/fileDoesNotExist.js'], { sourcemaps: true, allowEmpty: true, since: lastRun(sourceTest) })
+        .pipe(concat('scripts.min.js')) //put all sourced files into one file
+        .pipe(uglify()) //minify streamed files
+        .pipe(dest('./dist/', { sourcemaps: './maps' })); //move files into dist directory
 }
 
 exports.default = series(sourceTest);
