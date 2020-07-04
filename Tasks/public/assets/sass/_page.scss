@@ -1,0 +1,9 @@
+@use 'variables';
+
+.page {
+    background-color: variables.$primary;
+
+    .page-body {
+        font-size: 1.25rem;
+    }
+}
